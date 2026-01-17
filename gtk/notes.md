@@ -49,7 +49,7 @@
     - Same CSS as on the web with very minor changes (mostly missing features) - uses CSS selectors and everything
     - All of GTK and Adwaita is just CSS stylesheets (https://gitlab.gnome.org/GNOME/libadwaita/-/tree/main/src/stylesheet)
     - You can add your own stylesheets on top of that to change how your application behaves
-  - main.js/main.py etc. for the actual logic (https://github.com/pojntfx/vanlug-talk-2026-linux-app-development/blob/main/gtk/examples/js/main.jsk)
+  - main.js/main.py etc. for the actual logic (https://github.com/pojntfx/vanlug-talk-2026-linux-app-development/blob/main/gtk/examples/js/main.js)
     - This is where all of the application logic is
     - It's where you load the CSS files and connect the Blueprint files to the classes
     - E.g. if you have a button, this is where you connect that button to do something
