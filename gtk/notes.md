@@ -1,4 +1,4 @@
-# Outline
+# Outline for GNOME-Specific Part of the Presentation
 
 - GNOME (https://www.gnome.org/)
 - The GNOME HIG and developer ecosystem (Adwaita)
@@ -7,6 +7,7 @@
   - GTK vs Adwaita (core library vs. specific design system from GNOME)
   - Other desktops, like elementaryOS, also use GTK, but implement their own design system on top of GTK for elementaryOS, Granite: https://docs.elementary.io/hig)
   - GNOME apps are responsive/adaptive, meaning they run on desktops, tables and phones (e.g. postmarketOS: https://postmarketos.org/)
+  - Mixture of GPL and LGPL
 - Common GTK and Adwaita Components
   - GTK (https://gtk.org/)
     - Input Widgets
@@ -495,13 +496,15 @@
   - po/gettext for i18n (weblate)
   - Mallard for integrated files (f1 to open) (https://gitlab.gnome.org/World/highscore/-/blob/main/help/C/duck/opening-games.duck)
   - GSchema and GSettings for settings (dconf/registry-style) (https://github.com/pojntfx/multiplex/blob/main/assets/resources/index.gschema.xml and https://github.com/pojntfx/multiplex/blob/main/assets/resources/preferences.blp)
-  - meson.build and Flatpak manifest to build and distribute the application (see more later)
+  - meson.build and Flatpak manifest to build and distribute the application (see more about Flatpak specifically later) (this needs more work)
+    - meson.build
+    - GNOME and i18n imports make things easy (see puregotk examples for all of the imports in Meson)
 - GTK application structure (GObject, signals, properties, methods etc.)
   - GObject System (https://docs.gtk.org/gobject/tutorial.html):
     - Adds language-independend/C-based object system/OOP
     - Defines things like types and classes, objects, subclassing and so on
     - Is the reason why GTK is usable from so many languages
-    - All classes inherit from GObject.Widget
+    - All classes inherit from GObject.Object
   - Widgets (https://docs.gtk.org/gtk4/class.Widget.html)
     - Base component that can be rendered to the screen in GTK
     - All GTK components - buttons etc. - all inherit from Gtk.Widget
@@ -517,6 +520,9 @@
     - When using Blueprint, you're setting properties on each class (show Blueprint file with the docs open at the same time, e.g. ListBox in examples)
 - Writing apps in different languages (JS, C, Go, Rust, Java, Python etc.)
   - Simple examples, single file with Blueprint file and CSS (mention the others later, and use libadwaita autoloading for resources via GResource)
+  - https://vanlug.ca/ has a RSS feed where articles are published
+  - Live demo for JS and Python
+  - Recreate by going through commits
   - JS example (https://github.com/pojntfx/vanlug-talk-2026-linux-app-development/tree/main/gtk/examples/js)
   - Python example (https://github.com/pojntfx/vanlug-talk-2026-linux-app-development/tree/main/gtk/examples/python)
   - C example (https://gitlab.gnome.org/GNOME/gnome-calendar)
@@ -525,78 +531,6 @@
   - Java example (https://github.com/jwharm/java-gi-examples)
   - Lua example (https://github.com/vtrlx/tally)
   - Fortran example (https://github.com/vmagnin/gtk-fortran/tree/gtk4/examples)
-- Interacting with the OS through XDG Portals (https://flatpak.github.io/xdg-desktop-portal/docs/api-reference.html)
-  - Interfaces for the OS
-  - Independent of the desktop environment, everyone (KDE, GNOME etc.) uses the same interface, but different implementations
-  - Each desktop environment can optimize for their own use cases, e.g. on something like GNOME you'll get GTK dialogs and GNOME HIG-compliant design, on KDE the KDE HIG, on Sway you'll get very lightweight power-user portals etc.
-  - Available interfaces
-    - User Information
-      - [Account](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Account.html) - Portal for obtaining information about the user
-        - This simple interface lets sandboxed applications query basic information about the user, like their name and avatar photo.
-      - [Settings](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Settings.html) - Settings interface
-        - This interface provides read-only access to a small number of standardized host settings required for toolkits similar to XSettings. It is not for general purpose settings.
-    - Device Access
-      - [Camera](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Camera.html) - Camera portal
-        - The camera portal enables applications to access camera devices, such as web cams.
-      - [USB](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Usb.html) - Portal for USB device access
-        - This interface lets sandboxed applications monitor and request access to connected USB devices.
-      - [Wallpaper](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Wallpaper.html) - Portal for setting the desktop's Wallpaper
-        - This simple interface lets sandboxed applications set the user's desktop background picture.
-    - File Management
-      - [Documents](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Documents.html) - Document portal
-        - The document portal allows to make files from the outside world available to sandboxed applications in a controlled way. Exported files are made accessible via a FUSE filesystem.
-      - [File Chooser](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.FileChooser.html) - File chooser portal
-        - The FileChooser portal allows sandboxed applications to ask the user for access to files outside the sandbox. The portal backend presents the user with a file chooser dialog.
-      - [File Transfer](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.FileTransfer.html) - Portal for transferring files between apps
-        - The File Transfer portal operates as a middle-man between apps when transferring files via drag-and-drop or copy-paste, taking care of the necessary exporting of files in the document portal.
-      - [Trash](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Trash.html) - Portal for trashing files
-        - This simple interface lets sandboxed applications send files to the trashcan.
-    - Communication
-      - [Clipboard](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Clipboard.html) - Clipboard portal
-        - This portal does NOT create its own session. Instead, it offers existing sessions created from other portals the option to integrate with the clipboard.
-      - [Email](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Email.html) - Portal for sending email
-        - This simple portal lets sandboxed applications request to send an email, optionally providing an address, subject, body and attachments.
-      - [Notification](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Notification.html) - Portal for sending notifications
-        - This simple interface lets sandboxed applications send and withdraw notifications. It is not possible for the application to learn if the notification was actually presented to the user.
-      - [OpenURI](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.OpenURI.html) - Portal for opening URIs
-        - The OpenURI portal allows sandboxed applications to open URIs (e.g. a http: link to the application's homepage) under the control of the user.
-    - Launcher Management
-      - [Dynamic Launcher](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.DynamicLauncher.html) - Portal for installing application launchers
-        - The DynamicLauncher portal allows sandboxed (or unsandboxed) applications to install launchers (.desktop files) which have an icon associated with them and which execute a command in the application.
-    - System Integration
-      - [Background](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Background.html) - Portal for requesting autostart and background activity
-        - This simple interface lets sandboxed applications request that the application is allowed to run in the background or started automatically when the user logs in.
-      - [Inhibit](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Inhibit.html) - Portal for inhibiting session transitions
-        - This simple interface lets sandboxed applications inhibit the user session from ending, suspending, idling or getting switched away.
-      - [Global Shortcuts](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.GlobalShortcuts.html) - Portal for managing global shortcuts
-        - This portal lets applications create global shortcuts sessions and register shortcuts to them. These shortcuts are activated regardless of the focused state of the application window.
-    - Media & Display
-      - [Print](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Print.html) - Portal for printing
-        - The Print portal allows sandboxed applications to print.
-      - [Screenshot](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Screenshot.html) - Portal for taking screenshots
-        - This simple portal lets sandboxed applications request a screenshot.
-      - [ScreenCast](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.ScreenCast.html) - Screen cast portal
-        - The Screen cast portal allows to create screen cast sessions.
-      - [Remote Desktop](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.RemoteDesktop.html) - Remote desktop portal
-        - The Remote desktop portal allows to create remote desktop sessions.
-    - Hardware Monitoring
-      - [Game Mode](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.GameMode.html) - Portal for accessing GameMode
-        - Interface for accessing GameMode from within the sandbox. It is analogous to the com.feralinteractive.GameMode interface and proxies requests there but with additional permission checking and PID mapping.
-      - [Input Capture](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.InputCapture.html) - Portal for permitting input capture
-        - The InputCapture portal allows capture input events from connected physical or logical devices. Capturing input has two distinct states: "enabled" and "active".
-      - [Location](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Location.html) - Portal for obtaining information about the location
-        - This simple interface lets sandboxed applications query basic information about the location.
-      - [Memory Monitor](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.MemoryMonitor.html) - Memory monitoring portal
-        - The Memory Monitor interface provides information about low system memory to sandboxed applications. Applications are expected to use this interface indirectly via a library API such as the GLib GMemoryMonitor interface.
-      - [Network Monitor](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.NetworkMonitor.html) - Network monitoring portal
-        - The NetworkMonitor interface provides network status information to sandboxed applications. Applications are expected to use this interface indirectly via a library API such as the GLib GNetworkMonitor interface.
-      - [Power Profile Monitor](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.PowerProfileMonitor.html) - Power Profile monitoring portal
-        - The Power Profile Monitor interface provides information about the user-selected system-wide power profile to sandboxed applications. Applications are expected to use this interface indirectly via a library API such as the GLib GPowerProfileMonitor interface.
-      - [Proxy Resolver](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.ProxyResolver.html) - Proxy information
-        - The ProxyResolver interface provides network proxy information to sandboxed applications. Applications are expected to use this interface indirectly via a library API such as the GLib GProxyResolver interface.
-    - Performance & System
-      - [Realtime](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Realtime.html) - Portal for setting threads to realtime
-        - Interface for setting a thread to realtime from within the sandbox. It is analogous to the org.freedesktop.RealtimeKit1 interface and proxies requests there but with PID mapping.
 - Writing reusable modules that work from any language with GIR
   - Defining a widget
     - WebView vs. custom widget as a way to add components that GTK or libadwaita don't already have
@@ -623,26 +557,6 @@
   - Adwaita Demo, GTK Demo and GTK Widget Factory
   - GNOME OS reference platform (https://os.gnome.org/)
   - GTK Inspector (Ctrl + Shift + I, just like on the web) & adaptive preview (Ctrl + Shift + M)
-- Build and forge setup and distribution (Meson, Flatpak, Codeberg/GitHub, Flathub)
-  - Meson
-    - meson.build
-    - GNOME and i18n imports make things easy
-  - Flatpak
-    - Example: https://github.com/pojntfx/sessions/blob/main/com.pojtinger.felicitas.Sessions.json
-    - Offline and sandboxed builds
-    - Flatpak manifest
-    - Runtimes
-    - Caching
-    - Multiple sources
-  - Codeberg/GitHub (GH actions/Forgejo actions to build the Flatpak)
-  - Flathub (how to submit) (https://docs.flathub.org/docs/for-app-authors/submission)
-    - Forking the repo
-    - Submitting your app manifest
-    - Wait for review
-    - Making a release
-    - Waiting for it to be published
-    - Verification via your website or forge
-    - Downloading it from your website
 - Maintenance
   - OSS maintenance and releases (keeping up with GNOME releases, deprecations etc.)
   - Submitting your app to GNOME Circle (https://circle.gnome.org/)

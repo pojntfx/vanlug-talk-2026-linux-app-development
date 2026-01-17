@@ -1,0 +1,95 @@
+# Shared/Common Parts of the Talk
+
+- Interacting with the OS through XDG Portals (https://flatpak.github.io/xdg-desktop-portal/docs/api-reference.html)
+  - Interfaces for the OS
+  - Independent of the desktop environment, everyone (KDE, GNOME etc.) uses the same interface, but different implementations
+  - Each desktop environment can optimize for their own use cases, e.g. on something like GNOME you'll get GTK dialogs and GNOME HIG-compliant design, on KDE the KDE HIG, on Sway you'll get very lightweight power-user portals etc.
+  - Available interfaces
+    - User Information
+      - [Account](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Account.html) - Portal for obtaining information about the user
+        - This simple interface lets sandboxed applications query basic information about the user, like their name and avatar photo.
+      - [Settings](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Settings.html) - Settings interface
+        - This interface provides read-only access to a small number of standardized host settings required for toolkits similar to XSettings. It is not for general purpose settings.
+    - Device Access
+      - [Camera](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Camera.html) - Camera portal
+        - The camera portal enables applications to access camera devices, such as web cams.
+      - [USB](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Usb.html) - Portal for USB device access
+        - This interface lets sandboxed applications monitor and request access to connected USB devices.
+      - [Wallpaper](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Wallpaper.html) - Portal for setting the desktop's Wallpaper
+        - This simple interface lets sandboxed applications set the user's desktop background picture.
+    - File Management
+      - [Documents](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Documents.html) - Document portal
+        - The document portal allows to make files from the outside world available to sandboxed applications in a controlled way. Exported files are made accessible via a FUSE filesystem.
+      - [File Chooser](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.FileChooser.html) - File chooser portal
+        - The FileChooser portal allows sandboxed applications to ask the user for access to files outside the sandbox. The portal backend presents the user with a file chooser dialog.
+      - [File Transfer](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.FileTransfer.html) - Portal for transferring files between apps
+        - The File Transfer portal operates as a middle-man between apps when transferring files via drag-and-drop or copy-paste, taking care of the necessary exporting of files in the document portal.
+      - [Trash](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Trash.html) - Portal for trashing files
+        - This simple interface lets sandboxed applications send files to the trashcan.
+    - Communication
+      - [Clipboard](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Clipboard.html) - Clipboard portal
+        - This portal does NOT create its own session. Instead, it offers existing sessions created from other portals the option to integrate with the clipboard.
+      - [Email](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Email.html) - Portal for sending email
+        - This simple portal lets sandboxed applications request to send an email, optionally providing an address, subject, body and attachments.
+      - [Notification](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Notification.html) - Portal for sending notifications
+        - This simple interface lets sandboxed applications send and withdraw notifications. It is not possible for the application to learn if the notification was actually presented to the user.
+      - [OpenURI](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.OpenURI.html) - Portal for opening URIs
+        - The OpenURI portal allows sandboxed applications to open URIs (e.g. a http: link to the application's homepage) under the control of the user.
+    - Launcher Management
+      - [Dynamic Launcher](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.DynamicLauncher.html) - Portal for installing application launchers
+        - The DynamicLauncher portal allows sandboxed (or unsandboxed) applications to install launchers (.desktop files) which have an icon associated with them and which execute a command in the application.
+    - System Integration
+      - [Background](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Background.html) - Portal for requesting autostart and background activity
+        - This simple interface lets sandboxed applications request that the application is allowed to run in the background or started automatically when the user logs in.
+      - [Inhibit](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Inhibit.html) - Portal for inhibiting session transitions
+        - This simple interface lets sandboxed applications inhibit the user session from ending, suspending, idling or getting switched away.
+      - [Global Shortcuts](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.GlobalShortcuts.html) - Portal for managing global shortcuts
+        - This portal lets applications create global shortcuts sessions and register shortcuts to them. These shortcuts are activated regardless of the focused state of the application window.
+    - Media & Display
+      - [Print](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Print.html) - Portal for printing
+        - The Print portal allows sandboxed applications to print.
+      - [Screenshot](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Screenshot.html) - Portal for taking screenshots
+        - This simple portal lets sandboxed applications request a screenshot.
+      - [ScreenCast](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.ScreenCast.html) - Screen cast portal
+        - The Screen cast portal allows to create screen cast sessions.
+      - [Remote Desktop](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.RemoteDesktop.html) - Remote desktop portal
+        - The Remote desktop portal allows to create remote desktop sessions.
+    - Hardware Monitoring
+      - [Game Mode](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.GameMode.html) - Portal for accessing GameMode
+        - Interface for accessing GameMode from within the sandbox. It is analogous to the com.feralinteractive.GameMode interface and proxies requests there but with additional permission checking and PID mapping.
+      - [Input Capture](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.InputCapture.html) - Portal for permitting input capture
+        - The InputCapture portal allows capture input events from connected physical or logical devices. Capturing input has two distinct states: "enabled" and "active".
+      - [Location](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Location.html) - Portal for obtaining information about the location
+        - This simple interface lets sandboxed applications query basic information about the location.
+      - [Memory Monitor](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.MemoryMonitor.html) - Memory monitoring portal
+        - The Memory Monitor interface provides information about low system memory to sandboxed applications. Applications are expected to use this interface indirectly via a library API such as the GLib GMemoryMonitor interface.
+      - [Network Monitor](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.NetworkMonitor.html) - Network monitoring portal
+        - The NetworkMonitor interface provides network status information to sandboxed applications. Applications are expected to use this interface indirectly via a library API such as the GLib GNetworkMonitor interface.
+      - [Power Profile Monitor](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.PowerProfileMonitor.html) - Power Profile monitoring portal
+        - The Power Profile Monitor interface provides information about the user-selected system-wide power profile to sandboxed applications. Applications are expected to use this interface indirectly via a library API such as the GLib GPowerProfileMonitor interface.
+      - [Proxy Resolver](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.ProxyResolver.html) - Proxy information
+        - The ProxyResolver interface provides network proxy information to sandboxed applications. Applications are expected to use this interface indirectly via a library API such as the GLib GProxyResolver interface.
+    - Performance & System
+      - [Realtime](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Realtime.html) - Portal for setting threads to realtime
+        - Interface for setting a thread to realtime from within the sandbox. It is analogous to the org.freedesktop.RealtimeKit1 interface and proxies requests there but with PID mapping.
+
+- Build and forge setup and distribution (Meson, Flatpak, Codeberg/GitHub, Flathub)
+  - Flatpak (this needs more work)
+    - Example: https://github.com/pojntfx/sessions/blob/main/com.pojtinger.felicitas.Sessions.json
+    - Offline and sandboxed builds
+    - Flatpak manifest
+    - Build systems in manifests
+    - Runtimes
+    - Caching
+    - Multiple sources
+    - AppStream, Desktop Files etc. (include everything from Sessions)
+  - Forges Codeberg/GitHub (GH actions/Forgejo actions to build the Flatpak) (this needs more work)
+    - Sessions and Multiplex example for building and publishing the .flatpak bundle
+  - Flathub (how to submit) (https://docs.flathub.org/docs/for-app-authors/submission) (this needs more work)
+    - Forking the repo
+    - Submitting your app manifest
+    - Wait for review
+    - Making a release
+    - Waiting for it to be published
+    - Verification via your website or forge
+    - Downloading it from your website
