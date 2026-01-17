@@ -2,7 +2,52 @@ using Gtk 4.0;
 using Adw 1;
 
 template $MainWindow: Adw.ApplicationWindow {
-    default-width: 600;
-    default-height: 700;
+    default-width: 800;
+    default-height: 600;
     title: _("VanLUG News JS");
+
+    Adw.ToastOverlay toast_overlay {
+        Adw.ToolbarView {
+            [top]
+            Adw.HeaderBar {
+                [end]
+                Button refresh {
+                    icon-name: "view-refresh-symbolic";
+                }
+            }
+
+            content: ScrolledWindow {
+                vexpand: true;
+
+                Adw.Clamp {
+                    maximum-size: 500;
+                    margin-start: 12;
+                    margin-end: 12;
+                    margin-top: 12;
+                    margin-bottom: 12;
+
+                    ListBox articles {
+                        selection-mode: none;
+                        valign: start;
+
+                        Adw.ActionRow {
+                            title: "Upcoming exFAT Linux Driver Patch Can Boost Sequential Read Performance By ~10%";
+                            subtitle: "2026-01-61\nA patch for the open-source exFAT file-system driver for Linux can boost the sequential read performance by about 10% in preliminary tests.";
+                            activatable: true;
+
+                            [suffix]
+                            Gtk.Image {
+                                icon-name: "go-next-symbolic";
+                            }
+                        }
+
+                        styles [
+                            "boxed-list",
+                            "boxed-list--articles",
+                        ]
+                    }
+                }
+            };
+        }
+    }
 }
