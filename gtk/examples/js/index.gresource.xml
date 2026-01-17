@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gresources>
+    <gresource prefix="/com/pojtinger/felicitas/VanLUGNewsJS">
+        <file>window.ui</file>
+        <file>style.css</file>
+    </gresource>
+</gresources>

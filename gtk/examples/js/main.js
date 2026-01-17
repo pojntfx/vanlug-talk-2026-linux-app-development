@@ -1,9 +1,24 @@
 #!/usr/bin/env -S gjs -m
 
 import Adw from "gi://Adw?version=1";
+import GLib from "gi://GLib";
 import GObject from "gi://GObject";
 import Gio from "gi://Gio";
 import system from "system";
+
+Gio.resources_register(
+  Gio.Resource.load(
+    GLib.build_filenamev([GLib.get_current_dir(), "index.gresource"]),
+  ),
+);
+
+const MainWindow = GObject.registerClass(
+  {
+    GTypeName: "MainWindow",
+    Template: "resource:///com/pojtinger/felicitas/VanLUGNewsJS/window.ui",
+  },
+  class Window extends Adw.ApplicationWindow {},
+);
 
 const Application = GObject.registerClass(
   {
@@ -18,7 +33,9 @@ const Application = GObject.registerClass(
     }
 
     vfunc_activate() {
-      console.log("Hello, world!");
+      new MainWindow({
+        application: this,
+      }).present();
     }
   },
 );
