@@ -74,22 +74,48 @@
         - Interface for setting a thread to realtime from within the sandbox. It is analogous to the org.freedesktop.RealtimeKit1 interface and proxies requests there but with PID mapping.
 
 - Build and forge setup and distribution (Meson, Flatpak, Codeberg/GitHub, Flathub)
-  - Flatpak (this needs more work)
-    - Example: https://github.com/pojntfx/sessions/blob/main/com.pojtinger.felicitas.Sessions.json
-    - Offline and sandboxed builds
-    - Flatpak manifest
-    - Build systems in manifests
-    - Runtimes
-    - Caching
-    - Multiple sources
-    - AppStream, Desktop Files etc. (include everything from Sessions)
-  - Forges Codeberg/GitHub (GH actions/Forgejo actions to build the Flatpak) (this needs more work)
-    - Sessions and Multiplex example for building and publishing the .flatpak bundle
-  - Flathub (how to submit) (https://docs.flathub.org/docs/for-app-authors/submission) (this needs more work)
-    - Forking the repo
-    - Submitting your app manifest
-    - Wait for review
-    - Making a release
-    - Waiting for it to be published
-    - Verification via your website or forge
-    - Downloading it from your website
+  - Flatpak
+    - Both KDE and GNOME have standardized on a unified way of distributing applications, Flatpak
+    - Flatpak handles everything from building your app, to distributing them to your users, to updates, and to sandboxing (making sure that only the portals the user consents to using are actually being used for security and safety)
+    - Works for different architectures and form factors, e.g. a GNOME or KDE app can be installed on phones and laptops with the same format
+    - Flatpak works using a manifest (example: https://github.com/pojntfx/sessions/blob/main/com.pojtinger.felicitas.Sessions.json - go through each line)
+    - Desktop files provide launchers in the app menu (https://github.com/pojntfx/sessions/blob/main/assets/meta/com.pojtinger.felicitas.Sessions.desktop.in)
+    - Metainfo files define things like descriptions, age ratings, license information, screenshots and release information etc. that show up on Flathub (https://flathub.org/fr/apps/com.pojtinger.felicitas.Sessions) and your software center of choice
+    - You can build every Flatpak in the exact same way
+      - `flatpak-builder --force-clean --user --install-deps-from=flathub --repo=repo --install builddir com.pojtinger.felicitas.Sessions.json --disable-rofiles-fuse`
+      - `flatpak run com.pojtinger.felicitas.Sessions`
+      - `flatpak build-bundle repo sessions.flatpak com.pojtinger.felicitas.Sessions --runtime-repo=https://flathub.org/repo/flathub.flatpakrepo`
+  - Forges
+    - In order to publish your source code, you usually use a forge
+    - GitHub, GitLab and Codeberg (Forgejo are the most common ones)
+    - Forges provide things like a way to share your source code, work with other people, make release and build your app on a remote server so that people can download it
+    - Flatpaks can be built automatically by the forges' CI/CD system (https://github.com/pojntfx/sessions/blob/main/.github/workflows/flatpak.yaml)
+  - Once your app is ready to be used by users, you can publish it to Flathub, which is a big repository of apps that's preinstalled pretty much everywhere and easy to search through and use (https://flathub.org/)
+    - Flathub has security and quality controls for apps to be allowed into it (https://docs.flathub.org/docs/for-app-authors/requirements)
+    - Flathub also has ways for you to verify apps with your IDs or forge account, and a way to bookmark, build your apps for you etc. (https://flathub.org/fr/developer-portal, https://www.pojtinger.com/.well-known/org.flathub.VerifiedApps.txt)
+    - Apps that won't be accepted
+      - Console-only, CLI-only, or minimal/trivial apps
+      - Web wrappers, tray applets, shell extensions
+      - Wine/emulation apps (unless official upstream submission)
+      - Apps using end-of-life runtimes or dependencies
+      - Duplicates or forks without significant changes
+    - Application IDs
+      - Reverse-DNS format: `{tld}.{vendor}.{product}`
+      - Must control the domain (reachable via HTTPS)
+      - Code hosting: use `io.github.`, `io.gitlab.`, etc.
+      - Must match ID in Metainfo file
+    - Build
+      - No network during build — all dependencies in manifest
+      - Build from source with public URLs
+      - Stable releases only (no nightlies)
+    - Required Files (we already mentioned these earlier for Flatpak)
+      - Flatpak manifest (`{app-id}.json/.yml`)
+      - Metainfo file (must pass validation)
+      - Desktop file + icon (SVG or 256px PNG) for GUI apps
+    - Permissions
+      - Minimize permissions; use XDG Portals
+      - Limit filesystem/D-Bus/device access
+    - License & Branding
+      - Must allow redistribution
+      - No trademark violations in name/icon
+      - Unofficial packages must note it in description

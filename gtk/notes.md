@@ -187,6 +187,7 @@
         - Valid app ID format (the FQDNs we mentioned earlier)
         - No GNOME branding (until accepted)
         - Internationalization support
+        - Has a DOAP file (https://github.com/pojntfx/sessions/blob/main/Sessions.doap()()()()()()()())
     - Also possible for libraries and tooling around GNOME with similar restrictions (see https://gitlab.gnome.org/Teams/Circle/-/blob/main/library_criteria.md)
   - Contributing directly to GNOME
     - Everything is welcome, not just code
