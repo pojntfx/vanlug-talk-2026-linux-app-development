@@ -372,6 +372,120 @@
       - [Window](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Window.html) - `AdwWindow`
         - A freeform window.
         - ![Window](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/window.png)
+  - Patterns/HIG
+    - Containers
+      - [Windows](https://developer.gnome.org/hig/patterns/containers/windows.html)
+        - Windows are the main containers for app user interfaces.
+        - ![Application Window](https://developer.gnome.org/hig/_images/application-window.png)
+
+      - [Popovers](https://developer.gnome.org/hig/patterns/containers/popovers.html)
+        - A popover is a type of container that is overlaid on top of a window and which can be opened and closed.
+        - ![Popover](https://developer.gnome.org/hig/_images/popover.png)
+
+      - [Utility Panes](https://developer.gnome.org/hig/patterns/containers/utility-panes.html)
+        - Utility panes are vertical panels which are shown on one side of a window.
+        - ![Adaptive Utility Pane (Wide)](https://developer.gnome.org/hig/_images/adaptive-utility-pane-wide.png)
+
+      - [Boxed Lists](https://developer.gnome.org/hig/patterns/containers/boxed-lists.html)
+        - Boxed lists are a common type of list that can contain both controls and information.
+        - ![Boxed Lists](https://developer.gnome.org/hig/_images/boxed-lists.png)
+        - ![Switch Row](https://developer.gnome.org/hig/_images/switch-row.png)
+        - ![Action Row](https://developer.gnome.org/hig/_images/action-row.png)
+        - ![Combo Row](https://developer.gnome.org/hig/_images/combo-row.png)
+        - ![Entry Row](https://developer.gnome.org/hig/_images/entry-row.png)
+        - ![Spin Row](https://developer.gnome.org/hig/_images/spin-row.png)
+        - ![Property Row](https://developer.gnome.org/hig/_images/property-row.png)
+        - ![Expander Row](https://developer.gnome.org/hig/_images/expander-row.png)
+        - ![Button Rows](https://developer.gnome.org/hig/_images/button-rows.png)
+
+    - Navigation
+      - [View Switchers](https://developer.gnome.org/hig/patterns/nav/view-switchers.html)
+        - A view switcher is a control that allows switching between a small number of predefined views.
+        - ![View Switcher Title](https://developer.gnome.org/hig/_images/view-switcher-title.png)
+
+      - [Tabs](https://developer.gnome.org/hig/patterns/nav/tabs.html)
+        - Tabs allow a window to contain a mutable set of content items, such as pages, documents or images.
+        - ![Tab Bar](https://developer.gnome.org/hig/_images/tab-bar.png)
+
+      - [Sidebars](https://developer.gnome.org/hig/patterns/nav/sidebars.html)
+        - A sidebar is a vertical panel which contains a list of different locations.
+        - ![Adaptive Sidebar (Wide)](https://developer.gnome.org/hig/_images/adaptive-sidebar-wide.png)
+
+      - [Search](https://developer.gnome.org/hig/patterns/nav/search.html)
+        - Search allows content items to be located by filtering available content.
+        - ![Search](https://developer.gnome.org/hig/_images/search.png)
+
+    - Controls
+      - [Buttons](https://developer.gnome.org/hig/patterns/controls/buttons.html)
+        - Buttons are one of the most common and basic user interface elements.
+        - ![Buttons](https://developer.gnome.org/hig/_images/buttons.png)
+        - ![Suggested & Destructive Buttons](https://developer.gnome.org/hig/_images/buttons-suggested-destructive.png)
+        - ![Button Shapes](https://developer.gnome.org/hig/_images/button-shapes.png)
+
+      - [Menus](https://developer.gnome.org/hig/patterns/controls/menus.html)
+        - Menus are a common design pattern used for primary, secondary and context menus.
+        - ![Popover Menu List](https://developer.gnome.org/hig/_images/popover-menu-list.png)
+
+      - [Switches](https://developer.gnome.org/hig/patterns/controls/switches.html)
+        - Switches can be used for controlling features, settings or hardware that have a clear on/off logic.
+        - ![Switches](https://developer.gnome.org/hig/_images/switches.png)
+
+      - [Text Fields](https://developer.gnome.org/hig/patterns/controls/text-fields.html)
+        - Text fields allow single line text entry and editing.
+        - ![Text Fields](https://developer.gnome.org/hig/_images/text-fields.png)
+
+      - [Checkboxes](https://developer.gnome.org/hig/patterns/controls/checkboxes.html)
+        - Checkboxes allow users to control binary options or properties.
+        - ![Checkboxes](https://developer.gnome.org/hig/_images/checkboxes.png)
+
+      - [Radio Buttons](https://developer.gnome.org/hig/patterns/controls/radio-buttons.html)
+        - Radio buttons allow a selection to be made from a set of options.
+        - ![Radio Buttons](https://developer.gnome.org/hig/_images/radio-buttons.png)
+
+      - [Sliders](https://developer.gnome.org/hig/patterns/controls/sliders.html)
+        - A slider allows quickly selecting a value from a range.
+        - ![Sliders](https://developer.gnome.org/hig/_images/sliders.png)
+
+      - [Spin Buttons](https://developer.gnome.org/hig/patterns/controls/spin-buttons.html)
+        - A spin button is a text field that accepts a range of values, with buttons that allow the value to be adjusted.
+        - ![Spin Button](https://developer.gnome.org/hig/_images/spin-button.png)
+
+      - [Overlaid Controls](https://developer.gnome.org/hig/patterns/controls/overlaid.html)
+        - Controls that appear overlaid on content and are hidden on demand rather than being permanently visible.
+        - ![OSD Toolbar](https://developer.gnome.org/hig/_images/osd-toolbar.png)
+
+    - Feedback
+      - [Notifications](https://developer.gnome.org/hig/patterns/feedback/notifications.html)
+        - Notifications are used to inform users about events that are relevant to them.
+        - ![Notification](https://developer.gnome.org/hig/_images/notification.png)
+
+      - [Toasts](https://developer.gnome.org/hig/patterns/feedback/toasts.html)
+        - Toasts are popup banners that contain a label and sometimes a button, and are always transient and auto-dismiss.
+        - ![Toast Overlay](https://developer.gnome.org/hig/_images/toast-overlay.png)
+
+      - [Banners](https://developer.gnome.org/hig/patterns/feedback/banners.html)
+        - A banner is a strip along the top of a view, which contains a title and an optional button.
+        - ![Banner](https://developer.gnome.org/hig/_images/banner.png)
+
+      - [Progress Bars](https://developer.gnome.org/hig/patterns/feedback/progress-bars.html)
+        - Progress bars indicate progress on a task and show the proportion of the task that has been completed.
+        - ![Progress Bar](https://developer.gnome.org/hig/_images/progress-bar.png)
+        - ![OSD Progress Bar](https://developer.gnome.org/hig/_images/osd-progress-bar.png)
+
+      - [Spinners](https://developer.gnome.org/hig/patterns/feedback/spinners.html)
+        - Spinners indicate ongoing progress on an action or operation.
+        - ![Spinner](https://developer.gnome.org/hig/_images/spinner.png)
+
+      - [Dialogs](https://developer.gnome.org/hig/patterns/feedback/dialogs.html)
+        - Dialog windows present options, choices or information to users, which they must respond to in order to proceed.
+        - ![Alert Dialog](https://developer.gnome.org/hig/_images/alert-dialog.png)
+        - ![Action Dialog](https://developer.gnome.org/hig/_images/action-dialog.png)
+
+      - [Placeholder Pages](https://developer.gnome.org/hig/patterns/feedback/placeholders.html)
+        - Placeholder pages fill a view with an image, a heading, and an optional line of descriptive text.
+        - ![Placeholder Illustration](https://developer.gnome.org/hig/_images/placeholder-illustration.png)
+        - ![Placeholder Symbolic](https://developer.gnome.org/hig/_images/placeholder-symbolic.png)
+
 - GNOME application structure compared to web applications
   - FQDNs
   - Blueprint/XML files for layout (the "HTML" of GNOME)
