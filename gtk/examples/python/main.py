@@ -110,7 +110,7 @@ class Application(Adw.Application):
 
     def __init__(self):
         super().__init__(
-            application_id="com.pojtinger.felicitas.VanLUGNewsPython",
+            application_id="com.pojtinger.felicitas.VanLUGNews",
             flags=Gio.ApplicationFlags.DEFAULT_FLAGS,
         )
 
