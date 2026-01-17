@@ -1,13 +1,14 @@
 # Outline
 
+- GNOME (https://www.gnome.org/)
 - The GNOME HIG and developer ecosystem (Adwaita)
   - Get started on https://developer.gnome.org/
   - Design: https://developer.gnome.org/hig/
   - GTK vs Adwaita (core library vs. specific design system from GNOME)
   - Other desktops, like elementaryOS, also use GTK, but implement their own design system on top of GTK for elementaryOS, Granite: https://docs.elementary.io/hig)
-  - GNOME apps are responsive/adaptive, meaning they run on desktops, tables and phones
+  - GNOME apps are responsive/adaptive, meaning they run on desktops, tables and phones (e.g. postmarketOS: https://postmarketos.org/)
 - Common GTK and Adwaita Components
-  - GTK
+  - GTK (https://gtk.org/)
     - Input Widgets
       - [Button](https://docs.gtk.org/gtk4/class.Button.html) - `GtkButton`
         - A widget that calls a callback function when clicked.
@@ -220,7 +221,7 @@
       - [PrintDialog](https://docs.gtk.org/gtk4/class.PrintDialog.html) - `GtkPrintDialog`
         - An asynchronous API to present a print dialog to the user.
         - ![PrintDialog](https://docs.gtk.org/gtk4/printdialog.png)
-  - Adwaita
+  - Adwaita (https://gnome.pages.gitlab.gnome.org/libadwaita/)
     - Display Components
       - [Status Page](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.StatusPage.html) - `AdwStatusPage`
         - A page used for empty/error states and similar use-cases.
@@ -375,27 +376,41 @@
   - FQDNs
   - Blueprint/XML files for layout (the "HTML" of GNOME)
   - CSS for styling (it's just regular CSS)
-  - main.c/main.js/main.py etc. for the actual logic
+  - main.js/main.py etc. for the actual logic
   - GResources for loading any static assets in the application (icons, sounds, etc.)
   - po/gettext for i18n (weblate)
-  - Mallard for integrated files (f1 to open)
-  - GSchema and GSettings for settings (dconf/registry-style)
+  - Mallard for integrated files (f1 to open) (https://gitlab.gnome.org/World/highscore/-/blob/main/help/C/duck/opening-games.duck)
+  - GSchema and GSettings for settings (dconf/registry-style) (https://github.com/pojntfx/multiplex/blob/main/assets/resources/index.gschema.xml and https://github.com/pojntfx/multiplex/blob/main/assets/resources/preferences.blp)
   - meson.build and Flatpak manifest to build and distribute the application (see more later)
 - GTK application structure (GObject, signals, properties, methods etc.)
-  - GObject
-  - Classes
-  - Widgets
-  - Signals
+  - GObject System (https://docs.gtk.org/gobject/tutorial.html):
+    - Adds language-independend/C-based object system/OOP
+    - Defines things like types and classes, objects, subclassing and so on
+    - Is the reason why GTK is usable from so many languages
+    - All classes inherit from GObject.Widget
+  - Widgets (https://docs.gtk.org/gtk4/class.Widget.html)
+    - Base component that can be rendered to the screen in GTK
+    - All GTK components - buttons etc. - all inherit from Gtk.Widget
+  - Methods (example: https://docs.gtk.org/gtk4/class.Button.html#methods)
+    - Allows defining a method on a class that can be called
+    - For example, to set the icon of a button, you can call `Button.set_icon_name` (https://docs.gtk.org/gtk4/method.Button.set_icon_name.html)
+  - Signals (https://docs.gtk.org/gobject/signals.html)
+    - Allow emitting events from an object
+    - Useful if you want to attach to an event like "button has been clicked" - connect to the "clicked" signal and your function will be called by GTK
   - Properties
-  - Methods
+    - Can be readable or read-writable
+    - One object's property can be bound to another object's property automatically (so that when you flip a switch, an image becomes visible or invisible with less boilerplate)
+    - When using Blueprint, you're setting properties on each class (show Blueprint file with the docs open at the same time, e.g. ListBox in examples)
 - Writing apps in different languages (JS, C, Go, Rust, Java, Python etc.)
   - Simple examples, single file with Blueprint file and CSS (mention the others later, and use libadwaita autoloading for resources via GResource)
-  - JS example
-  - Python example
-  - C example
-  - Go example
-  - Rust example
-  - Java example
+  - JS example (https://github.com/pojntfx/vanlug-talk-2026-linux-app-development/tree/main/gtk/examples/js)
+  - Python example (https://github.com/pojntfx/vanlug-talk-2026-linux-app-development/tree/main/gtk/examples/python)
+  - C example (https://gitlab.gnome.org/GNOME/gnome-calendar)
+  - Go example (https://flathub.org/fr/apps/com.pojtinger.felicitas.Sessions)
+  - Rust example (https://codeberg.org/haydn/typesetter)
+  - Java example (https://github.com/jwharm/java-gi-examples)
+  - Lua example (https://github.com/vtrlx/tally)
+  - Fortran example (https://github.com/vmagnin/gtk-fortran/tree/gtk4/examples)
 - Interacting with the OS through XDG Portals (https://flatpak.github.io/xdg-desktop-portal/docs/api-reference.html)
   - Interfaces for the OS
   - Independent of the desktop environment, everyone (KDE, GNOME etc.) uses the same interface, but different implementations
@@ -472,30 +487,39 @@
   - Defining a widget
     - WebView vs. custom widget as a way to add components that GTK or libadwaita don't already have
     - GTK snapshot API for fully custom, GPU-accelerated components (example: Sessions)
-  - Building the library
+  - Building the library (https://github.com/jwijenbergh/puregotk/tree/main/examples/mylib-gtk-meson)
   - Generating the GIR file via the generator
   - Distributing as a Flatpak module
   - Reading documentation for installed libraries via Manuals
-  - Generating bindings for your language or using introspection
+  - Generating bindings for your language or using introspection (https://github.com/jwijenbergh/puregotk/tree/main/examples/mylib-gtk-meson-go)
+  - Using the reusable library (https://github.com/jwijenbergh/puregotk/tree/main/examples/myapp-gnome-meson)
   - Link to the FOSDEM talk I'll be doing (https://pretalx.fosdem.org/fosdem-2026/me/submissions/A8FZCD/)
 - IDE setup (VSCode, GNOME Builder)
-  - VSCode
+  - VSCode/VSCodium
+    - VSCodium (https://vscodium.com/)
     - JS/C/Go/Rust/Java/Python extension
-    - Blueprint extension
-    - Meson extension
-    - Flatpak extension
-  - GNOME Builder
+    - Blueprint extension (https://open-vsx.org/extension/sonnyp/blueprint-gtk)
+    - Meson extension (https://open-vsx.org/extension/mesonbuild/mesonbuild)
+    - Flatpak extension (https://open-vsx.org/extension/bilelmoussaoui/flatpak-vscode)
+  - GNOME Builder (https://flathub.org/fr/apps/org.gnome.Builder)
     - Generating a new app using the IDE
     - Building and debugging
-    - Preview: Foundry as a future tool
-  - GNOME Workbench
+    - Preview: Foundry as a future tool (https://gitlab.gnome.org/GNOME/foundry)
+  - GNOME Workbench (https://apps.gnome.org/fr/Workbench/)
   - Adwaita Demo, GTK Demo and GTK Widget Factory
+  - GNOME OS reference platform (https://os.gnome.org/)
+  - GTK Inspector (Ctrl + Shift + I, just like on the web) & adaptive preview (Ctrl + Shift + M)
 - Build and forge setup and distribution (Meson, Flatpak, Codeberg/GitHub, Flathub)
   - Meson
     - meson.build
     - GNOME and i18n imports make things easy
   - Flatpak
-    - Offline builds
+    - Example: https://github.com/pojntfx/sessions/blob/main/com.pojtinger.felicitas.Sessions.json
+    - Offline and sandboxed builds
+    - Flatpak manifest
+    - Runtimes
+    - Caching
+    - Multiple sources
   - Codeberg/GitHub (GH actions/Forgejo actions to build the Flatpak)
   - Flathub (how to submit) (https://docs.flathub.org/docs/for-app-authors/submission)
     - Forking the repo
@@ -506,11 +530,11 @@
     - Verification via your website or forge
     - Downloading it from your website
 - Maintenance
-  - OSS maintenance and releases
+  - OSS maintenance and releases (keeping up with GNOME releases, deprecations etc.)
   - Submitting your app to GNOME Circle (https://circle.gnome.org/)
     - Apps
       - Requirements (https://gitlab.gnome.org/Teams/Releng/AppOrganization/-/blob/main/AppCriteria.md)
     - Libraries
       - Requirements (https://gitlab.gnome.org/Teams/Circle/-/blob/main/library_criteria.md)
   - Contributing directly to GNOME
-  - GNOME foundation membership and it's benefits
+  - GNOME foundation membership and it's benefits (https://foundation.gnome.org/membership)
