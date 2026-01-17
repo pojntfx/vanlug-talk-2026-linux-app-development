@@ -7,6 +7,7 @@ import GLib from "gi://GLib";
 import GObject from "gi://GObject";
 import Gio from "gi://Gio";
 import system from "system";
+import GXml from "gi://GXml?version=0.20";
 
 Gio.resources_register(
   Gio.Resource.load(
@@ -82,22 +83,32 @@ const MainWindow = GObject.registerClass(
     }
 
     #load() {
-      const items = [
-        new Article({
-          title:
-            "Upcoming exFAT Linux Driver Patch Can Boost Sequential Read Performance By ~10%",
-          date: "2026-01-16",
-          description:
-            "A patch for the open-source exFAT file-system driver for Linux can boost the sequential read performance by about 10% in preliminary tests.",
-          link: "https://vanlug.ca/2026/01/14/updates-to-guis-launched-for-2026/",
-        }),
-      ];
-
       this.#articles.remove_all();
-      items.forEach((item) => this.#articles.append(item));
+
+      const doc = new GXml.XDocument();
+      doc.read_from_file(Gio.File.new_for_uri("https://vanlug.ca/feed/"), null);
+
+      const articles = doc.get_elements_by_tag_name("item");
+      for (let i = 0; i < articles.get_length(); i++) {
+        const article = articles.item(i);
+
+        this.#articles.append(
+          new Article({
+            title: article.get_elements_by_tag_name("title").item(0).content,
+            date: new Date(
+              article.get_elements_by_tag_name("pubDate").item(0).content,
+            ).toLocaleDateString(),
+            description: article
+              .get_elements_by_tag_name("description")
+              .item(0)
+              .content.slice(0, 200),
+            link: article.get_elements_by_tag_name("link").item(0).content,
+          }),
+        );
+      }
 
       this._toast_overlay.add_toast(
-        new Adw.Toast({ title: `Loaded ${items.length} articles` }),
+        new Adw.Toast({ title: `Loaded ${articles.get_length()} articles` }),
       );
     }
   },
