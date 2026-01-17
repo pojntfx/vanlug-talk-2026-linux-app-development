@@ -1,12 +1,13 @@
 #!/usr/bin/python3
 
-from gi.repository import Gtk, Adw, GLib, GObject, Gio, Gdk, GXml
 import sys
 import gi
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 gi.require_version("GXml", "0.20")
+
+from gi.repository import Gtk, Adw, GLib, GObject, Gio, Gdk, GXml
 
 Gio.resources_register(
     Gio.Resource.load(GLib.build_filenamev(
@@ -30,7 +31,7 @@ class Article(GObject.Object):
         self.link = link
 
 
-@Gtk.Template(resource_path="/com/pojtinger/felicitas/VanLUGNewsJS/window.ui")
+@Gtk.Template(resource_path="/com/pojtinger/felicitas/VanLUGNews/window.ui")
 class MainWindow(Adw.ApplicationWindow):
     __gtype_name__ = "MainWindow"
 

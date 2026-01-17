@@ -55,7 +55,7 @@ const Article = GObject.registerClass(
 const MainWindow = GObject.registerClass(
   {
     GTypeName: "MainWindow",
-    Template: "resource:///com/pojtinger/felicitas/VanLUGNewsJS/window.ui",
+    Template: "resource:///com/pojtinger/felicitas/VanLUGNews/window.ui",
     InternalChildren: ["article_list", "toast_overlay", "refresh_button"],
   },
   class Window extends Adw.ApplicationWindow {
@@ -121,7 +121,7 @@ const Application = GObject.registerClass(
   class Application extends Adw.Application {
     constructor() {
       super({
-        application_id: "com.pojtinger.felicitas.VanLUGNewsJS",
+        application_id: "com.pojtinger.felicitas.VanLUGNews",
         flags: Gio.ApplicationFlags.DEFAULT_FLAGS,
       });
     }
