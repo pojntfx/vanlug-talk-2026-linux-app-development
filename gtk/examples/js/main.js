@@ -55,7 +55,7 @@ const MainWindow = GObject.registerClass(
   {
     GTypeName: "MainWindow",
     Template: "resource:///com/pojtinger/felicitas/VanLUGNewsJS/window.ui",
-    InternalChildren: ["article_list"],
+    InternalChildren: ["article_list", "toast_overlay"],
   },
   class Window extends Adw.ApplicationWindow {
     #articles;
@@ -81,8 +81,7 @@ const MainWindow = GObject.registerClass(
     }
 
     #load() {
-      this.#articles.remove_all();
-      this.#articles.append(
+      const items = [
         new Article({
           title:
             "Upcoming exFAT Linux Driver Patch Can Boost Sequential Read Performance By ~10%",
@@ -91,6 +90,13 @@ const MainWindow = GObject.registerClass(
             "A patch for the open-source exFAT file-system driver for Linux can boost the sequential read performance by about 10% in preliminary tests.",
           link: "https://vanlug.ca/2026/01/14/updates-to-guis-launched-for-2026/",
         }),
+      ];
+
+      this.#articles.remove_all();
+      items.forEach((item) => this.#articles.append(item));
+
+      this._toast_overlay.add_toast(
+        new Adw.Toast({ title: `Loaded ${items.length} articles` }),
       );
     }
   },
