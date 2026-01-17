@@ -1,0 +1,516 @@
+# Outline
+
+- The GNOME HIG and developer ecosystem (Adwaita)
+  - Get started on https://developer.gnome.org/
+  - Design: https://developer.gnome.org/hig/
+  - GTK vs Adwaita (core library vs. specific design system from GNOME)
+  - Other desktops, like elementaryOS, also use GTK, but implement their own design system on top of GTK for elementaryOS, Granite: https://docs.elementary.io/hig)
+  - GNOME apps are responsive/adaptive, meaning they run on desktops, tables and phones
+- Common GTK and Adwaita Components
+  - GTK
+    - Input Widgets
+      - [Button](https://docs.gtk.org/gtk4/class.Button.html) - `GtkButton`
+        - A widget that calls a callback function when clicked.
+        - ![Button](https://docs.gtk.org/gtk4/button.png)
+      - [ToggleButton](https://docs.gtk.org/gtk4/class.ToggleButton.html) - `GtkToggleButton`
+        - A button which remains 'pressed-in' when clicked.
+        - ![ToggleButton](https://docs.gtk.org/gtk4/toggle-button.png)
+      - [CheckButton](https://docs.gtk.org/gtk4/class.CheckButton.html) - `GtkCheckButton`
+        - A widget that places a label next to an indicator.
+        - ![CheckButton](https://docs.gtk.org/gtk4/check-button.png)
+      - [Entry](https://docs.gtk.org/gtk4/class.Entry.html) - `GtkEntry`
+        - A single-line text entry widget.
+        - ![Entry](https://docs.gtk.org/gtk4/entry.png)
+      - [SearchEntry](https://docs.gtk.org/gtk4/class.SearchEntry.html) - `GtkSearchEntry`
+        - A single-line text entry widget for use as a search entry.
+        - ![SearchEntry](https://docs.gtk.org/gtk4/search-entry.png)
+      - [PasswordEntry](https://docs.gtk.org/gtk4/class.PasswordEntry.html) - `GtkPasswordEntry`
+        - A single-line text input widget designed for secure password and secret entry.
+        - ![PasswordEntry](https://docs.gtk.org/gtk4/password-entry.png)
+      - [EditableLabel](https://docs.gtk.org/gtk4/class.EditableLabel.html) - `GtkEditableLabel`
+        - A widget that allows users to edit the displayed text by switching to an 'edit mode'.
+        - ![EditableLabel](https://docs.gtk.org/gtk4/editable-label.png)
+      - [Text](https://docs.gtk.org/gtk4/class.Text.html) - `GtkText`
+        - A single-line text entry that serves as the shared implementation for text editing.
+        - ![Text](https://docs.gtk.org/gtk4/entry.png)
+      - [SpinButton](https://docs.gtk.org/gtk4/class.SpinButton.html) - `GtkSpinButton`
+        - A widget that allows to enter or change numeric values.
+        - ![SpinButton](https://docs.gtk.org/gtk4/spinbutton.png)
+      - [Scale](https://docs.gtk.org/gtk4/class.Scale.html) - `GtkScale`
+        - A widget that allows to select a numeric value with a slider control.
+        - ![Scale](https://docs.gtk.org/gtk4/scales.png)
+      - [DropDown](https://docs.gtk.org/gtk4/class.DropDown.html) - `GtkDropDown`
+        - A widget that allows users to select an item from a list of options.
+        - ![DropDown](https://docs.gtk.org/gtk4/drop-down.png)
+    - Display Widgets
+      - [Label](https://docs.gtk.org/gtk4/class.Label.html) - `GtkLabel`
+        - A widget that displays a small amount of text.
+        - ![Label](https://docs.gtk.org/gtk4/label.png)
+      - [Image](https://docs.gtk.org/gtk4/class.Image.html) - `GtkImage`
+        - A widget that displays an image.
+        - ![Image](https://docs.gtk.org/gtk4/image.png)
+      - [Picture](https://docs.gtk.org/gtk4/class.Picture.html) - `GtkPicture`
+        - A widget that displays a GdkPaintable.
+        - ![Picture](https://docs.gtk.org/gtk4/picture.png)
+      - [Spinner](https://docs.gtk.org/gtk4/class.Spinner.html) - `GtkSpinner`
+        - A widget that displays an icon-size spinning animation.
+        - ![Spinner](https://docs.gtk.org/gtk4/spinner.png)
+      - [ProgressBar](https://docs.gtk.org/gtk4/class.ProgressBar.html) - `GtkProgressBar`
+        - A widget that displays the progress of a long-running operation.
+        - ![ProgressBar](https://docs.gtk.org/gtk4/progressbar.png)
+      - [LevelBar](https://docs.gtk.org/gtk4/class.LevelBar.html) - `GtkLevelBar`
+        - A widget that shows a level indicator.
+        - ![LevelBar](https://docs.gtk.org/gtk4/levelbar.png)
+      - [Tooltip](https://docs.gtk.org/gtk4/class.Tooltip.html) - `GtkTooltip`
+        - Represents a widget tooltip.
+        - ![Tooltip](https://docs.gtk.org/gtk4/label.png)
+    - Layout Containers
+      - [Box](https://docs.gtk.org/gtk4/class.Box.html) - `GtkBox`
+        - A container widget that arranges child widgets into a single row or column.
+        - ![Box](https://docs.gtk.org/gtk4/box.png)
+      - [Grid](https://docs.gtk.org/gtk4/class.Grid.html) - `GtkGrid`
+        - A container that arranges its child widgets in rows and columns.
+        - ![Grid](https://docs.gtk.org/gtk4/grid.png)
+      - [Paned](https://docs.gtk.org/gtk4/class.Paned.html) - `GtkPaned`
+        - A container that arranges its children in two panes, horizontally or vertically.
+        - ![Paned](https://docs.gtk.org/gtk4/panes.png)
+      - [Notebook](https://docs.gtk.org/gtk4/class.Notebook.html) - `GtkNotebook`
+        - A widget that switches between children using tabs.
+        - ![Notebook](https://docs.gtk.org/gtk4/notebook.png)
+      - [Stack](https://docs.gtk.org/gtk4/class.Stack.html) - `GtkStack`
+        - A widget that shows one of its children at a time.
+        - ![Stack](https://docs.gtk.org/gtk4/stack.png)
+      - [Expander](https://docs.gtk.org/gtk4/class.Expander.html) - `GtkExpander`
+        - A widget that allows the user to reveal or conceal a child widget.
+        - ![Expander](https://docs.gtk.org/gtk4/expander.png)
+      - [Frame](https://docs.gtk.org/gtk4/class.Frame.html) - `GtkFrame`
+        - A widget that surrounds its child with a decorative frame and an optional label.
+        - ![Frame](https://docs.gtk.org/gtk4/frame.png)
+      - [AspectFrame](https://docs.gtk.org/gtk4/class.AspectFrame.html) - `GtkAspectFrame`
+        - A widget that preserves the aspect ratio of its child.
+        - ![AspectFrame](https://docs.gtk.org/gtk4/frame.png)
+      - [CenterBox](https://docs.gtk.org/gtk4/class.CenterBox.html) - `GtkCenterBox`
+        - A widget that arranges three children in a row, keeping the middle child centered.
+        - ![CenterBox](https://docs.gtk.org/gtk4/centerbox.png)
+      - [Overlay](https://docs.gtk.org/gtk4/class.Overlay.html) - `GtkOverlay`
+        - A container that places 'overlay' widgets on top of a single main child.
+        - ![Overlay](https://docs.gtk.org/gtk4/overlay.png)
+    - List/Tree Widgets
+      - [ListView](https://docs.gtk.org/gtk4/class.ListView.html) - `GtkListView`
+        - A widget that presents a large dynamic list of items.
+        - ![ListView](https://docs.gtk.org/gtk4/list-box.png)
+      - [GridView](https://docs.gtk.org/gtk4/class.GridView.html) - `GtkGridView`
+        - A widget that presents a large dynamic grid of items.
+        - ![GridView](https://docs.gtk.org/gtk4/icon-view.png)
+      - [ColumnView](https://docs.gtk.org/gtk4/class.ColumnView.html) - `GtkColumnView`
+        - A widget that presents a large dynamic list of items using multiple columns with headers.
+        - ![ColumnView](https://docs.gtk.org/gtk4/list-and-tree.png)
+      - [ListBox](https://docs.gtk.org/gtk4/class.ListBox.html) - `GtkListBox`
+        - A widget that shows a vertical list.
+        - ![ListBox](https://docs.gtk.org/gtk4/list-box.png)
+      - [ListBoxRow](https://docs.gtk.org/gtk4/class.ListBoxRow.html) - `GtkListBoxRow`
+        - The kind of widget that can be added to a GtkListBox.
+        - ![ListBoxRow](https://docs.gtk.org/gtk4/list-box.png)
+      - [FlowBox](https://docs.gtk.org/gtk4/class.FlowBox.html) - `GtkFlowBox`
+        - A container that puts child widgets in a reflowing grid.
+        - ![FlowBox](https://docs.gtk.org/gtk4/flow-box.png)
+      - [FlowBoxChild](https://docs.gtk.org/gtk4/class.FlowBoxChild.html) - `GtkFlowBoxChild`
+        - The kind of widget that can be added to a GtkFlowBox.
+        - ![FlowBoxChild](https://docs.gtk.org/gtk4/flow-box.png)
+    - Menu/Navigation Widgets
+      - [MenuButton](https://docs.gtk.org/gtk4/class.MenuButton.html) - `GtkMenuButton`
+        - A widget that displays a popup when clicked.
+        - ![MenuButton](https://docs.gtk.org/gtk4/menu-button.png)
+      - [PopoverMenu](https://docs.gtk.org/gtk4/class.PopoverMenu.html) - `GtkPopoverMenu`
+        - A subclass of GtkPopover that implements menu behavior.
+        - ![PopoverMenu](https://docs.gtk.org/gtk4/menu.png)
+      - [PopoverMenuBar](https://docs.gtk.org/gtk4/class.PopoverMenuBar.html) - `GtkPopoverMenuBar`
+        - A widget that presents a horizontal bar of items that pop up menus when clicked.
+        - ![PopoverMenuBar](https://docs.gtk.org/gtk4/menubar.png)
+      - [Popover](https://docs.gtk.org/gtk4/class.Popover.html) - `GtkPopover`
+        - A widget that presents a bubble-like popup.
+        - ![Popover](https://docs.gtk.org/gtk4/popover.png)
+      - [PopoverBin](https://docs.gtk.org/gtk4/class.PopoverBin.html) - `GtkPopoverBin`
+        - A single child container with a popover.
+        - ![PopoverBin](https://docs.gtk.org/gtk4/popover.png)
+      - [HeaderBar](https://docs.gtk.org/gtk4/class.HeaderBar.html) - `GtkHeaderBar`
+        - A widget that creates a custom titlebar for a window.
+        - ![HeaderBar](https://docs.gtk.org/gtk4/headerbar.png)
+      - [SearchBar](https://docs.gtk.org/gtk4/class.SearchBar.html) - `GtkSearchBar`
+        - A widget that reveals a search entry when search is started.
+        - ![SearchBar](https://docs.gtk.org/gtk4/search-bar.png)
+      - [ActionBar](https://docs.gtk.org/gtk4/class.ActionBar.html) - `GtkActionBar`
+        - A widget that presents contextual actions.
+        - ![ActionBar](https://docs.gtk.org/gtk4/action-bar.png)
+      - [StackSwitcher](https://docs.gtk.org/gtk4/class.StackSwitcher.html) - `GtkStackSwitcher`
+        - A widget that shows a row of buttons to switch between GtkStack pages.
+        - ![StackSwitcher](https://docs.gtk.org/gtk4/stackswitcher.png)
+      - [StackSidebar](https://docs.gtk.org/gtk4/class.StackSidebar.html) - `GtkStackSidebar`
+        - A widget that uses a sidebar to switch between GtkStack pages.
+        - ![StackSidebar](https://docs.gtk.org/gtk4/sidebar.png)
+    - Media Widgets
+      - [Video](https://docs.gtk.org/gtk4/class.Video.html) - `GtkVideo`
+        - A widget that shows a GtkMediaStream with media controls.
+        - ![Video](https://docs.gtk.org/gtk4/video.png)
+      - [MediaControls](https://docs.gtk.org/gtk4/class.MediaControls.html) - `GtkMediaControls`
+        - A widget that shows controls for video playback.
+        - ![MediaControls](https://docs.gtk.org/gtk4/media-controls.png)
+      - [MediaFile](https://docs.gtk.org/gtk4/class.MediaFile.html) - `GtkMediaFile`
+        - A class that implements the GtkMediaStream interface for files.
+        - ![MediaFile](https://docs.gtk.org/gtk4/video.png)
+    - Other Interactive Widgets
+      - [Calendar](https://docs.gtk.org/gtk4/class.Calendar.html) - `GtkCalendar`
+        - A widget that displays a Gregorian calendar, one month at a time.
+        - ![Calendar](https://docs.gtk.org/gtk4/calendar.png)
+      - [EmojiChooser](https://docs.gtk.org/gtk4/class.EmojiChooser.html) - `GtkEmojiChooser`
+        - A widget used by text widgets to let users insert Emoji characters.
+        - ![EmojiChooser](https://docs.gtk.org/gtk4/emojichooser.png)
+      - [LinkButton](https://docs.gtk.org/gtk4/class.LinkButton.html) - `GtkLinkButton`
+        - A button with a hyperlink.
+        - ![LinkButton](https://docs.gtk.org/gtk4/link-button.png)
+      - [Switch](https://docs.gtk.org/gtk4/class.Switch.html) - `GtkSwitch`
+        - A widget that shows a 'light switch' that has two states: on or off.
+        - ![Switch](https://docs.gtk.org/gtk4/switch.png)
+      - [ScrolledWindow](https://docs.gtk.org/gtk4/class.ScrolledWindow.html) - `GtkScrolledWindow`
+        - A widget that makes its child scrollable.
+        - ![ScrolledWindow](https://docs.gtk.org/gtk4/scrolledwindow.png)
+      - [Scrollbar](https://docs.gtk.org/gtk4/class.Scrollbar.html) - `GtkScrollbar`
+        - A widget that shows a horizontal or vertical scrollbar.
+        - ![Scrollbar](https://docs.gtk.org/gtk4/scrollbar.png)
+      - [TextView](https://docs.gtk.org/gtk4/class.TextView.html) - `GtkTextView`
+        - A widget that displays the contents of a GtkTextBuffer.
+        - ![TextView](https://docs.gtk.org/gtk4/multiline-text.png)
+      - [Revealer](https://docs.gtk.org/gtk4/class.Revealer.html) - `GtkRevealer`
+        - A widget that animates the transition of its child from invisible to visible.
+        - ![Revealer](https://docs.gtk.org/gtk4/expander.png)
+      - [Separator](https://docs.gtk.org/gtk4/class.Separator.html) - `GtkSeparator`
+        - A widget that draws a horizontal or vertical line to separate other widgets.
+        - ![Separator](https://docs.gtk.org/gtk4/separator.png)
+      - [WindowControls](https://docs.gtk.org/gtk4/class.WindowControls.html) - `GtkWindowControls`
+        - A widget that displays window frame controls like minimize, maximize, and close buttons.
+        - ![WindowControls](https://docs.gtk.org/gtk4/windowcontrols.png)
+      - [WindowHandle](https://docs.gtk.org/gtk4/class.WindowHandle.html) - `GtkWindowHandle`
+        - A widget that implements titlebar functionality for a window.
+        - ![WindowHandle](https://docs.gtk.org/gtk4/headerbar.png)
+    - Window/Dialog Widgets
+      - [Window](https://docs.gtk.org/gtk4/class.Window.html) - `GtkWindow`
+        - A toplevel window which can contain other widgets.
+        - ![Window](https://docs.gtk.org/gtk4/window.png)
+      - [ApplicationWindow](https://docs.gtk.org/gtk4/class.ApplicationWindow.html) - `GtkApplicationWindow`
+        - A GtkWindow subclass that integrates with GtkApplication.
+        - ![ApplicationWindow](https://docs.gtk.org/gtk4/window.png)
+      - [AlertDialog](https://docs.gtk.org/gtk4/class.AlertDialog.html) - `GtkAlertDialog`
+        - A class that collects the arguments needed to present a message to the user.
+        - ![AlertDialog](https://docs.gtk.org/gtk4/messagedialog.png)
+      - [FileDialog](https://docs.gtk.org/gtk4/class.FileDialog.html) - `GtkFileDialog`
+        - An asynchronous API to present a file chooser dialog.
+        - ![FileDialog](https://docs.gtk.org/gtk4/filechooser.png)
+      - [ColorDialog](https://docs.gtk.org/gtk4/class.ColorDialog.html) - `GtkColorDialog`
+        - An asynchronous API to present a color chooser dialog.
+        - ![ColorDialog](https://docs.gtk.org/gtk4/colorchooser.png)
+      - [ColorDialogButton](https://docs.gtk.org/gtk4/class.ColorDialogButton.html) - `GtkColorDialogButton`
+        - A widget that opens a color chooser dialog to select a color.
+        - ![ColorDialogButton](https://docs.gtk.org/gtk4/color-button.png)
+      - [FontDialog](https://docs.gtk.org/gtk4/class.FontDialog.html) - `GtkFontDialog`
+        - An asynchronous API to present a font chooser dialog.
+        - ![FontDialog](https://docs.gtk.org/gtk4/fontchooser.png)
+      - [FontDialogButton](https://docs.gtk.org/gtk4/class.FontDialogButton.html) - `GtkFontDialogButton`
+        - A widget that opens a font chooser dialog to select a font.
+        - ![FontDialogButton](https://docs.gtk.org/gtk4/font-button.png)
+      - [PrintDialog](https://docs.gtk.org/gtk4/class.PrintDialog.html) - `GtkPrintDialog`
+        - An asynchronous API to present a print dialog to the user.
+        - ![PrintDialog](https://docs.gtk.org/gtk4/printdialog.png)
+  - Adwaita
+    - Display Components
+      - [Status Page](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.StatusPage.html) - `AdwStatusPage`
+        - A page used for empty/error states and similar use-cases.
+        - ![Status Page](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/status-page.png)
+      - [Toast Overlay](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ToastOverlay.html) - `AdwToastOverlay`
+        - A widget showing toasts above its content.
+        - ![Toast Overlay](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/toast-overlay.png)
+      - [Banner](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Banner.html) - `AdwBanner`
+        - A bar with contextual information.
+        - ![Banner](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/banner.png)
+      - [Spinner](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Spinner.html) - `AdwSpinner`
+        - A widget showing a loading spinner.
+        - ![Spinner](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/spinner.png)
+      - [Avatar](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Avatar.html) - `AdwAvatar`
+        - A widget displaying an image, with a generated fallback.
+        - ![Avatar](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/avatar.png)
+      - [Shortcut Label](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ShortcutLabel.html) - `AdwShortcutLabel`
+        - A widget that displays a keyboard shortcut.
+        - ![Shortcut Label](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/shortcut-label.png)
+    - Controls
+      - [Toggle Group](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ToggleGroup.html) - `AdwToggleGroup`
+        - A group of exclusive toggles.
+        - ![Toggle Group](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/toggle-group.png)
+      - [Split Button](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.SplitButton.html) - `AdwSplitButton`
+        - A combined button and dropdown widget.
+        - ![Split Button](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/split-button.png)
+      - [Button Content](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ButtonContent.html) - `AdwButtonContent`
+        - A helper widget for creating buttons.
+        - ![Button Content](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/button-content.png)
+    - Dialogs & Windows
+      - [Dialog](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Dialog.html) - `AdwDialog`
+        - An adaptive dialog container.
+        - ![Dialog (Floating)](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/dialog-floating.png)
+        - ![Dialog (Bottom)](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/dialog-bottom.png)
+      - [Alert Dialog](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.AlertDialog.html) - `AdwAlertDialog`
+        - A dialog presenting a message or a question.
+        - ![Alert Dialog](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/alert-dialog.png)
+      - [About Dialog](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.AboutDialog.html) - `AdwAboutDialog`
+        - A dialog showing information about the application.
+        - ![About Dialog](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/about-dialog.png)
+      - [Shortcuts Dialog](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ShortcutsDialog.html) - `AdwShortcutsDialog`
+        - A dialog that displays application's keyboard shortcuts.
+        - ![Shortcuts Dialog](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/shortcuts-dialog.png)
+      - [Bottom Sheet](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.BottomSheet.html) - `AdwBottomSheet`
+        - A bottom sheet with an optional bottom bar.
+        - ![Bottom Sheet](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/bottom-sheet.png)
+    - List Rows
+      - [Action Row](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ActionRow.html) - `AdwActionRow`
+        - A row used to present actions.
+        - ![Action Row](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/action-row.png)
+      - [Switch Row](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.SwitchRow.html) - `AdwSwitchRow`
+        - A row used to represent two states.
+        - ![Switch Row](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/switch-row.png)
+      - [Combo Row](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ComboRow.html) - `AdwComboRow`
+        - A row used to choose from a list of items.
+        - ![Combo Row](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/combo-row.png)
+      - [Expander Row](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ExpanderRow.html) - `AdwExpanderRow`
+        - A row used to reveal widgets.
+        - ![Expander Row](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/expander-row.png)
+      - [Entry Row](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.EntryRow.html) - `AdwEntryRow`
+        - A row with an embedded text entry.
+        - ![Entry Row](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/entry-row.png)
+      - [Password Entry Row](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.PasswordEntryRow.html) - `AdwPasswordEntryRow`
+        - A row tailored for entering secrets.
+        - ![Password Entry Row](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/password-entry-row.png)
+      - [Spin Row](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.SpinRow.html) - `AdwSpinRow`
+        - A row with an embedded spin button.
+        - ![Spin Row](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/spin-row.png)
+      - [Button Row](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ButtonRow.html) - `AdwButtonRow`
+        - A row that looks like a button.
+        - ![Button Row](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/button-rows.png)
+    - Preferences
+      - [Preferences Group](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.PreferencesGroup.html) - `AdwPreferencesGroup`
+        - A group of preference rows.
+        - ![Preferences Group](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/preferences-group.png)
+      - [Preferences Page](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.PreferencesPage.html) - `AdwPreferencesPage`
+        - A page within PreferencesDialog.
+        - ![Preferences Page](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/preferences-page.png)
+      - [Preferences Dialog](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.PreferencesDialog.html) - `AdwPreferencesDialog`
+        - A dialog showing application's preferences.
+        - ![Preferences Dialog](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/preferences-dialog.png)
+    - Navigation
+      - [Navigation View](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.NavigationView.html) - `AdwNavigationView`
+        - A page-based navigation container.
+        - ![Navigation View](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/navigation-view.png)
+      - [Navigation Split View](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.NavigationSplitView.html) - `AdwNavigationSplitView`
+        - Sidebar and content side by side or as navigation view.
+        - ![Navigation Split View](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/navigation-split-view.png)
+        - ![Navigation Split View (Collapsed)](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/navigation-split-view-collapsed.png)
+      - [Overlay Split View](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.OverlaySplitView.html) - `AdwOverlaySplitView`
+        - Sidebar and content side by side or as an overlay.
+        - ![Overlay Split View](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/overlay-split-view.png)
+        - ![Overlay Split View (Collapsed)](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/overlay-split-view-collapsed.png)
+    - Carousel
+      - [Carousel](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Carousel.html) - `AdwCarousel`
+        - A paginated scrolling widget.
+        - ![Carousel](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/carousel.png)
+      - [Carousel Indicator Dots](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.CarouselIndicatorDots.html) - `AdwCarouselIndicatorDots`
+        - A dots indicator for Carousel.
+        - ![Carousel Indicator Dots](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/carousel-indicator-dots.png)
+      - [Carousel Indicator Lines](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.CarouselIndicatorLines.html) - `AdwCarouselIndicatorLines`
+        - A lines indicator for Carousel.
+        - ![Carousel Indicator Lines](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/carousel-indicator-lines.png)
+    - View Switchers
+      - [View Switcher](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ViewSwitcher.html) - `AdwViewSwitcher`
+        - An adaptive view switcher.
+        - ![View Switcher](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/view-switcher.png)
+      - [View Switcher Bar](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ViewSwitcherBar.html) - `AdwViewSwitcherBar`
+        - A view switcher action bar.
+        - ![View Switcher Bar](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/view-switcher-bar.png)
+      - [Inline View Switcher](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.InlineViewSwitcher.html) - `AdwInlineViewSwitcher`
+        - A view switcher that uses a toggle group.
+        - ![Inline View Switcher](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/inline-view-switcher.png)
+    - Tabs
+      - [Tab Bar](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.TabBar.html) - `AdwTabBar`
+        - A tab bar for TabView.
+        - ![Tab Bar](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/tab-bar.png)
+      - [Tab Overview](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.TabOverview.html) - `AdwTabOverview`
+        - A tab overview for TabView.
+        - ![Tab Overview](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/tab-overview.png)
+      - [Tab Button](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.TabButton.html) - `AdwTabButton`
+        - A button that displays the number of pages.
+        - ![Tab Button](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/tab-button.png)
+    - Layout
+      - [Breakpoint Bin](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.BreakpointBin.html) - `AdwBreakpointBin`
+        - A widget that changes layout based on available size.
+        - ![Breakpoint Bin](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/breakpoint-bin.png)
+      - [Clamp](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Clamp.html) - `AdwClamp`
+        - A widget constraining its child to a given size.
+        - ![Clamp (Wide)](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/clamp-wide.png)
+        - ![Clamp (Narrow)](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/clamp-narrow.png)
+      - [Wrap Box](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.WrapBox.html) - `AdwWrapBox`
+        - A box-like widget that can wrap into multiple lines.
+        - ![Wrap Box](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/wrap-box.png)
+      - [Bin](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Bin.html) - `AdwBin`
+        - A widget with one child.
+        - ![Bin](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/bin.png)
+    - Helpers & Utilities
+      - [Toolbar View](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ToolbarView.html) - `AdwToolbarView`
+        - A widget containing a page with top and/or bottom bars.
+        - ![Toolbar View](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/toolbar-view.png)
+      - [Window Title](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.WindowTitle.html) - `AdwWindowTitle`
+        - A helper widget for setting a window's title and subtitle.
+        - ![Window Title](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/window-title.png)
+      - [Header Bar](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.HeaderBar.html) - `AdwHeaderBar`
+        - A title bar widget.
+        - ![Header Bar](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/header-bar.png)
+      - [Window](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.Window.html) - `AdwWindow`
+        - A freeform window.
+        - ![Window](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.0/window.png)
+- GNOME application structure compared to web applications
+  - FQDNs
+  - Blueprint/XML files for layout (the "HTML" of GNOME)
+  - CSS for styling (it's just regular CSS)
+  - main.c/main.js/main.py etc. for the actual logic
+  - GResources for loading any static assets in the application (icons, sounds, etc.)
+  - po/gettext for i18n (weblate)
+  - Mallard for integrated files (f1 to open)
+  - GSchema and GSettings for settings (dconf/registry-style)
+  - meson.build and Flatpak manifest to build and distribute the application (see more later)
+- GTK application structure (GObject, signals, properties, methods etc.)
+  - GObject
+  - Classes
+  - Widgets
+  - Signals
+  - Properties
+  - Methods
+- Writing apps in different languages (JS, C, Go, Rust, Java, Python etc.)
+  - Simple examples, single file with Blueprint file and CSS (mention the others later, and use libadwaita autoloading for resources via GResource)
+  - JS example
+  - Python example
+  - C example
+  - Go example
+  - Rust example
+  - Java example
+- Interacting with the OS through XDG Portals (https://flatpak.github.io/xdg-desktop-portal/docs/api-reference.html)
+  - Interfaces for the OS
+  - Independent of the desktop environment, everyone (KDE, GNOME etc.) uses the same interface, but different implementations
+  - Each desktop environment can optimize for their own use cases, e.g. on something like GNOME you'll get GTK dialogs and GNOME HIG-compliant design, on KDE the KDE HIG, on Sway you'll get very lightweight power-user portals etc.
+  - Available interfaces
+    - User Information
+      - [Account](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Account.html) - Portal for obtaining information about the user
+        - This simple interface lets sandboxed applications query basic information about the user, like their name and avatar photo.
+      - [Settings](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Settings.html) - Settings interface
+        - This interface provides read-only access to a small number of standardized host settings required for toolkits similar to XSettings. It is not for general purpose settings.
+    - Device Access
+      - [Camera](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Camera.html) - Camera portal
+        - The camera portal enables applications to access camera devices, such as web cams.
+      - [USB](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Usb.html) - Portal for USB device access
+        - This interface lets sandboxed applications monitor and request access to connected USB devices.
+      - [Wallpaper](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Wallpaper.html) - Portal for setting the desktop's Wallpaper
+        - This simple interface lets sandboxed applications set the user's desktop background picture.
+    - File Management
+      - [Documents](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Documents.html) - Document portal
+        - The document portal allows to make files from the outside world available to sandboxed applications in a controlled way. Exported files are made accessible via a FUSE filesystem.
+      - [File Chooser](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.FileChooser.html) - File chooser portal
+        - The FileChooser portal allows sandboxed applications to ask the user for access to files outside the sandbox. The portal backend presents the user with a file chooser dialog.
+      - [File Transfer](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.FileTransfer.html) - Portal for transferring files between apps
+        - The File Transfer portal operates as a middle-man between apps when transferring files via drag-and-drop or copy-paste, taking care of the necessary exporting of files in the document portal.
+      - [Trash](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Trash.html) - Portal for trashing files
+        - This simple interface lets sandboxed applications send files to the trashcan.
+    - Communication
+      - [Clipboard](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Clipboard.html) - Clipboard portal
+        - This portal does NOT create its own session. Instead, it offers existing sessions created from other portals the option to integrate with the clipboard.
+      - [Email](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Email.html) - Portal for sending email
+        - This simple portal lets sandboxed applications request to send an email, optionally providing an address, subject, body and attachments.
+      - [Notification](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Notification.html) - Portal for sending notifications
+        - This simple interface lets sandboxed applications send and withdraw notifications. It is not possible for the application to learn if the notification was actually presented to the user.
+      - [OpenURI](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.OpenURI.html) - Portal for opening URIs
+        - The OpenURI portal allows sandboxed applications to open URIs (e.g. a http: link to the application's homepage) under the control of the user.
+    - Launcher Management
+      - [Dynamic Launcher](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.DynamicLauncher.html) - Portal for installing application launchers
+        - The DynamicLauncher portal allows sandboxed (or unsandboxed) applications to install launchers (.desktop files) which have an icon associated with them and which execute a command in the application.
+    - System Integration
+      - [Background](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Background.html) - Portal for requesting autostart and background activity
+        - This simple interface lets sandboxed applications request that the application is allowed to run in the background or started automatically when the user logs in.
+      - [Inhibit](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Inhibit.html) - Portal for inhibiting session transitions
+        - This simple interface lets sandboxed applications inhibit the user session from ending, suspending, idling or getting switched away.
+      - [Global Shortcuts](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.GlobalShortcuts.html) - Portal for managing global shortcuts
+        - This portal lets applications create global shortcuts sessions and register shortcuts to them. These shortcuts are activated regardless of the focused state of the application window.
+    - Media & Display
+      - [Print](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Print.html) - Portal for printing
+        - The Print portal allows sandboxed applications to print.
+      - [Screenshot](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Screenshot.html) - Portal for taking screenshots
+        - This simple portal lets sandboxed applications request a screenshot.
+      - [ScreenCast](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.ScreenCast.html) - Screen cast portal
+        - The Screen cast portal allows to create screen cast sessions.
+      - [Remote Desktop](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.RemoteDesktop.html) - Remote desktop portal
+        - The Remote desktop portal allows to create remote desktop sessions.
+    - Hardware Monitoring
+      - [Game Mode](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.GameMode.html) - Portal for accessing GameMode
+        - Interface for accessing GameMode from within the sandbox. It is analogous to the com.feralinteractive.GameMode interface and proxies requests there but with additional permission checking and PID mapping.
+      - [Input Capture](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.InputCapture.html) - Portal for permitting input capture
+        - The InputCapture portal allows capture input events from connected physical or logical devices. Capturing input has two distinct states: "enabled" and "active".
+      - [Location](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Location.html) - Portal for obtaining information about the location
+        - This simple interface lets sandboxed applications query basic information about the location.
+      - [Memory Monitor](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.MemoryMonitor.html) - Memory monitoring portal
+        - The Memory Monitor interface provides information about low system memory to sandboxed applications. Applications are expected to use this interface indirectly via a library API such as the GLib GMemoryMonitor interface.
+      - [Network Monitor](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.NetworkMonitor.html) - Network monitoring portal
+        - The NetworkMonitor interface provides network status information to sandboxed applications. Applications are expected to use this interface indirectly via a library API such as the GLib GNetworkMonitor interface.
+      - [Power Profile Monitor](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.PowerProfileMonitor.html) - Power Profile monitoring portal
+        - The Power Profile Monitor interface provides information about the user-selected system-wide power profile to sandboxed applications. Applications are expected to use this interface indirectly via a library API such as the GLib GPowerProfileMonitor interface.
+      - [Proxy Resolver](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.ProxyResolver.html) - Proxy information
+        - The ProxyResolver interface provides network proxy information to sandboxed applications. Applications are expected to use this interface indirectly via a library API such as the GLib GProxyResolver interface.
+    - Performance & System
+      - [Realtime](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Realtime.html) - Portal for setting threads to realtime
+        - Interface for setting a thread to realtime from within the sandbox. It is analogous to the org.freedesktop.RealtimeKit1 interface and proxies requests there but with PID mapping.
+- Writing reusable modules that work from any language with GIR
+  - Defining a widget
+    - WebView vs. custom widget as a way to add components that GTK or libadwaita don't already have
+    - GTK snapshot API for fully custom, GPU-accelerated components (example: Sessions)
+  - Building the library
+  - Generating the GIR file via the generator
+  - Distributing as a Flatpak module
+  - Reading documentation for installed libraries via Manuals
+  - Generating bindings for your language or using introspection
+  - Link to the FOSDEM talk I'll be doing (https://pretalx.fosdem.org/fosdem-2026/me/submissions/A8FZCD/)
+- IDE setup (VSCode, GNOME Builder)
+  - VSCode
+    - JS/C/Go/Rust/Java/Python extension
+    - Blueprint extension
+    - Meson extension
+    - Flatpak extension
+  - GNOME Builder
+    - Generating a new app using the IDE
+    - Building and debugging
+    - Preview: Foundry as a future tool
+  - GNOME Workbench
+  - Adwaita Demo, GTK Demo and GTK Widget Factory
+- Build and forge setup and distribution (Meson, Flatpak, Codeberg/GitHub, Flathub)
+  - Meson
+    - meson.build
+    - GNOME and i18n imports make things easy
+  - Flatpak
+    - Offline builds
+  - Codeberg/GitHub (GH actions/Forgejo actions to build the Flatpak)
+  - Flathub (how to submit) (https://docs.flathub.org/docs/for-app-authors/submission)
+    - Forking the repo
+    - Submitting your app manifest
+    - Wait for review
+    - Making a release
+    - Waiting for it to be published
+    - Verification via your website or forge
+    - Downloading it from your website
+- Maintenance
+  - OSS maintenance and releases
+  - Submitting your app to GNOME Circle (https://circle.gnome.org/)
+    - Apps
+      - Requirements (https://gitlab.gnome.org/Teams/Releng/AppOrganization/-/blob/main/AppCriteria.md)
+    - Libraries
+      - Requirements (https://gitlab.gnome.org/Teams/Circle/-/blob/main/library_criteria.md)
+  - Contributing directly to GNOME
+  - GNOME foundation membership and it's benefits
