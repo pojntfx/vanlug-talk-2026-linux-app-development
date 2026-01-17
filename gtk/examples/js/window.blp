@@ -26,20 +26,9 @@ template $MainWindow: Adw.ApplicationWindow {
                     margin-top: 12;
                     margin-bottom: 12;
 
-                    ListBox articles {
+                    ListBox article_list {
                         selection-mode: none;
                         valign: start;
-
-                        Adw.ActionRow {
-                            title: "Upcoming exFAT Linux Driver Patch Can Boost Sequential Read Performance By ~10%";
-                            subtitle: "2026-01-61\nA patch for the open-source exFAT file-system driver for Linux can boost the sequential read performance by about 10% in preliminary tests.";
-                            activatable: true;
-
-                            [suffix]
-                            Gtk.Image {
-                                icon-name: "go-next-symbolic";
-                            }
-                        }
 
                         styles [
                             "boxed-list",

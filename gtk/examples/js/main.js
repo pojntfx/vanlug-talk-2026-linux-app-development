@@ -1,5 +1,7 @@
 #!/usr/bin/env -S gjs -m
 
+import Gdk from "gi://Gdk?version=4.0";
+import Gtk from "gi://Gtk?version=4.0";
 import Adw from "gi://Adw?version=1";
 import GLib from "gi://GLib";
 import GObject from "gi://GObject";
@@ -12,12 +14,86 @@ Gio.resources_register(
   ),
 );
 
+const Article = GObject.registerClass(
+  {
+    GTypeName: "Article",
+    Properties: {
+      title: GObject.ParamSpec.string(
+        "title",
+        "",
+        "",
+        GObject.ParamFlags.READWRITE,
+        "",
+      ),
+      date: GObject.ParamSpec.string(
+        "date",
+        "",
+        "",
+        GObject.ParamFlags.READWRITE,
+        "",
+      ),
+      description: GObject.ParamSpec.string(
+        "description",
+        "",
+        "",
+        GObject.ParamFlags.READWRITE,
+        "",
+      ),
+      link: GObject.ParamSpec.string(
+        "link",
+        "",
+        "",
+        GObject.ParamFlags.READWRITE,
+        "",
+      ),
+    },
+  },
+  class Article extends GObject.Object {},
+);
+
 const MainWindow = GObject.registerClass(
   {
     GTypeName: "MainWindow",
     Template: "resource:///com/pojtinger/felicitas/VanLUGNewsJS/window.ui",
+    InternalChildren: ["article_list"],
   },
-  class Window extends Adw.ApplicationWindow {},
+  class Window extends Adw.ApplicationWindow {
+    #articles;
+
+    constructor(params) {
+      super(params);
+
+      this.#articles = new Gio.ListStore({ item_type: Article });
+      this._article_list.bind_model(this.#articles, (article) => {
+        const row = new Adw.ActionRow({
+          title: article.title,
+          subtitle: `${article.date}\n${article.description}`,
+          activatable: true,
+        });
+        row.add_suffix(new Gtk.Image({ icon_name: "go-next-symbolic" }));
+        row.connect("activated", () =>
+          Gtk.show_uri(this, article.link, Gdk.CURRENT_TIME),
+        );
+        return row;
+      });
+
+      this.#load();
+    }
+
+    #load() {
+      this.#articles.remove_all();
+      this.#articles.append(
+        new Article({
+          title:
+            "Upcoming exFAT Linux Driver Patch Can Boost Sequential Read Performance By ~10%",
+          date: "2026-01-16",
+          description:
+            "A patch for the open-source exFAT file-system driver for Linux can boost the sequential read performance by about 10% in preliminary tests.",
+          link: "https://vanlug.ca/2026/01/14/updates-to-guis-launched-for-2026/",
+        }),
+      );
+    }
+  },
 );
 
 const Application = GObject.registerClass(
