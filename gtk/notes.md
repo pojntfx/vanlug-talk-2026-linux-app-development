@@ -1,14 +1,14 @@
 # Outline for GNOME-Specific Part of the Presentation
 
 - GNOME (https://www.gnome.org/)
-- The GNOME HIG and developer ecosystem (Adwaita)
+- The GNOME HIG and developer ecosystem (Adwaita) (this needs more work)
   - Get started on https://developer.gnome.org/
   - Design: https://developer.gnome.org/hig/
   - GTK vs Adwaita (core library vs. specific design system from GNOME)
   - Other desktops, like elementaryOS, also use GTK, but implement their own design system on top of GTK for elementaryOS, Granite: https://docs.elementary.io/hig)
   - GNOME apps are responsive/adaptive, meaning they run on desktops, tables and phones (e.g. postmarketOS: https://postmarketos.org/)
   - Mixture of GPL and LGPL
-- Common GTK and Adwaita Components
+- Common GTK and Adwaita Components (this needs more work/selection)
   - GTK (https://gtk.org/)
     - Input Widgets
       - [Button](https://docs.gtk.org/gtk4/class.Button.html) - `GtkButton`
@@ -608,10 +608,49 @@
   - GTK Inspector (Ctrl + Shift + I, just like on the web) & adaptive preview (Ctrl + Shift + M)
 - Maintenance
   - OSS maintenance and releases (keeping up with GNOME releases, deprecations etc.)
+    - After your app has been published to Flathub, you need to now make sure to keep supporting it
+    - Making sure to update your dependencies, merge new translations, respond to issues
+    - When there is a new release of GNOME, you should make sure you follow the new HIG and switch away from deprecated APIs etc.
+    - Doing releases, writing release notes, and responding to users is key
   - Submitting your app to GNOME Circle (https://circle.gnome.org/)
-    - Apps (this needs work)
-      - Requirements (https://gitlab.gnome.org/Teams/Releng/AppOrganization/-/blob/main/AppCriteria.md)
-    - Libraries (this needs work)
-      - Requirements (https://gitlab.gnome.org/Teams/Circle/-/blob/main/library_criteria.md)
+    - If your app works well, is maintainable and matches the GNOME mission in some way, submitting it to GNOME circle is a good idea
+    - Once you're in GNOME circle, GNOME will advertise it for you, you can become a member of the GNOME foundation, and get access to build infrastructure etc.
+    - In order for the app to be accepted, you need to match some quality criteria (https://gitlab.gnome.org/Teams/Releng/AppOrganization/-/blob/main/AppCriteria.md)
+      - Technology & Design
+        - Uses GTK 4 + Libadwaita with GNOME runtime on Flathub
+        - Follows Human Interface Guidelines
+        - Dark mode and high-contrast mode work correctly
+      - Quality & Maintenance
+        - Basic features work as expected, easy to get started
+        - Evidence of recent development activity
+        - No known issues that can lead to data loss
+      - Accessibility
+        - Full keyboard navigation with standard shortcuts
+        - Works with Orca screen reader
+        - Large text mode supported, sufficient contrast
+      - Legal & Content
+        - OSI-approved license, no CLA required
+        - Works without proprietary software
+        - Adheres to GNOME Code of Conduct
+      - Metadata & Distribution
+        - Valid app metainfo, proper naming and icon
+        - Quality screenshots and summary
+        - Content rating and hardware support info present
+      - Meta
+        - Available on Flathub for x86_64 and aarch64
+        - Valid app ID format (the FQDNs we mentioned earlier)
+        - No GNOME branding (until accepted)
+        - Internationalization support
+    - Also possible for libraries and tooling around GNOME with similar restrictions (see https://gitlab.gnome.org/Teams/Circle/-/blob/main/library_criteria.md)
   - Contributing directly to GNOME
+    - Everything is welcome, not just code
+    - Donations (become a friend of GNOME) - a subscription that actually matters: https://donate.gnome.org/
+    - Code: https://welcome.gnome.org/fr/team/programming/
+    - Design: https://welcome.gnome.org/fr/team/design/
+    - Translations: https://welcome.gnome.org/en/team/translation/
+    - Testing: https://handbook.gnome.org/testing.html
   - GNOME foundation membership and it's benefits (https://foundation.gnome.org/membership)
+    - Vote in elections
+    - Run for election
+    - Propose changes
+    - GNOME email addresses, Matrix accounts, Blogs, Nextcloud, Travel sponsorships and more
