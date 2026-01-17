@@ -489,16 +489,65 @@
 
 - GNOME application structure compared to web applications
   - FQDNs
-  - Blueprint/XML files for layout (the "HTML" of GNOME)
-  - CSS for styling (it's just regular CSS)
-  - main.js/main.py etc. for the actual logic
-  - GResources for loading any static assets in the application (icons, sounds, etc.)
-  - po/gettext for i18n (weblate)
+    - Apps need to have global, world-unique IDs
+    - Similar to domains, but backwards
+    - For example, for today's example that will be `com.pojtinger.felicitas.VanLUGNews`
+  - Blueprint/XML files for layout (the "HTML" of GNOME) (https://github.com/pojntfx/vanlug-talk-2026-linux-app-development/blob/main/gtk/examples/js/window.blp)
+    - Defines the structure of the application - buttons, widgets, webviews and so on
+    - Defines no logic, just how the application is structured
+    - Some style is defined (layout etc.), unlike how it is done in HTML in the web
+    - There can be multiple, e.g. one for the main window, one for the login screen, one for the settings
+    - Are "bound" to a class that implements logic
+  - CSS for styling (it's just regular CSS) (https://github.com/pojntfx/vanlug-talk-2026-linux-app-development/blob/main/gtk/examples/js/style.css)
+    - Just like on the web, for GTK CSS is used to style how applications look like
+    - Same CSS as on the web with very minor changes (mostly missing features) - uses CSS selectors and everything
+    - All of GTK and Adwaita is just CSS stylesheets (https://gitlab.gnome.org/GNOME/libadwaita/-/tree/main/src/stylesheet)
+    - You can add your own stylesheets on top of that to change how your application behaves
+  - main.js/main.py etc. for the actual logic (https://github.com/pojntfx/vanlug-talk-2026-linux-app-development/blob/main/gtk/examples/js/main.jsk)
+    - This is where all of the application logic is
+    - It's where you load the CSS files and connect the Blueprint files to the classes
+    - E.g. if you have a button, this is where you connect that button to do something
+  - GResources for loading any static assets in the application (icons, sounds, etc.) (https://github.com/pojntfx/vanlug-talk-2026-linux-app-development/blob/main/gtk/examples/js/index.gresource.xml)
+    - This is where you reference your Blueprint and CSS files, images, sounds etc. and build them into a binary bundle
+    - That binary bundle is then loaded when your app launches
+    - Instead of referencing e.g. a blueprint file relative by it's path when the application launches (which is fragile since the paths change depending on where you install the app), you instead reference the file/resource you'd like to access with `FQDN/relative path`
+  - po/gettext for i18n (POTFILES, default.pot, Weblate) (https://github.com/jwijenbergh/puregotk/blob/main/examples/myapp-gnome-meson/po/myapp-gnome-meson.pot)
+    - Applications need to get translated/adapted ("localized"/"internationalized")
+    - A system called gettext is used for this
+    - You use a gettext library to access localized versions of a string in your source code and/or Blueprint files (e.g. `_("Hello")` → `你好`)
+    - `xgettext` then scans your source files (listed a file named `POTFILES`) for the `_(...)` pattern and writes all the strings that it found and where it found them to a `po/myapp.pot` file
+    - You can then use that `.pot` file as a template to add translations to your apps (e.g. https://github.com/jwijenbergh/puregotk/blob/main/examples/myapp-gnome-meson/po/fr_CA.po)
+    - Meson etc. will then compile those `.po` files into `.mo` binary files, install them in a well-known location, and parse them at runtime to get the translated files for you
+    - Gettext is so widely used that there is a very vibrant ecosystem of apps that you can use to contribute translations
+    - For editing files, [Translation Editor](https://flathub.org/fr/apps/org.gnome.Gtranslator) can be used
+    - For more advanced workflows, Weblate (https://hosted.weblate.org/projects/sessions/) can be used (demo with Sessions) - no need for technical knowledge, anyone can translate into their language with a browser
+    - GNOME itself uses it's own platfor, "Damned Lies" (https://l10n.gnome.org/)
   - Mallard for integrated files (f1 to open) (https://gitlab.gnome.org/World/highscore/-/blob/main/help/C/duck/opening-games.duck)
-  - GSchema and GSettings for settings (dconf/registry-style) (https://github.com/pojntfx/multiplex/blob/main/assets/resources/index.gschema.xml and https://github.com/pojntfx/multiplex/blob/main/assets/resources/preferences.blp)
-  - meson.build and Flatpak manifest to build and distribute the application (see more about Flatpak specifically later) (this needs more work)
-    - meson.build
-    - GNOME and i18n imports make things easy (see puregotk examples for all of the imports in Meson)
+    - Integrated help that you can ship with apps
+    - Will be available offline and serves an embedded handbook
+    - A bit outdated/old-fashioned, but still very useful IMHO
+    - Demo by pressing F1 in nautilus
+  - GSchema and GSettings for settings (dconf/registry-style)
+    - You can use config files to configure things on Linux, and those work well
+    - But sometimes you want to have proper static typing and a centralized way to store everything, which is what GSchema is for
+    - First you define a schema and include it in your GResource file (https://github.com/pojntfx/multiplex/blob/main/assets/resources/index.gschema.xml)
+    - Then you can simply access them as GTK properties from app (https://github.com/pojntfx/multiplex/blob/main/internal/components/preferences_dialog.go#L98-L116)
+    - And bind your inputs to the values (https://github.com/pojntfx/multiplex/blob/main/assets/resources/preferences.blp)
+    - You can use dconf-Editor to look at all the schemas you've installed (show dconf-editor for the Multiplex schemas as an example)
+  - Meson configuration
+    - Root meson.build (https://github.com/jwijenbergh/puregotk/blob/main/examples/myapp-gnome-meson/meson.build)
+      - Defines language and version
+      - Adds any arguments to the project as a whole
+      - Imports i18n and GNOME meson modules
+    - po/meson.build (https://github.com/jwijenbergh/puregotk/blob/main/examples/myapp-gnome-meson/po/meson.build)
+      - Defines i18n setup
+      - Configures keywords that are used to access internationalized strings
+    - src/meson.build (https://github.com/jwijenbergh/puregotk/blob/main/examples/myapp-gnome-meson/src/meson.build)
+      - Writes metadata like versions and where compiled i18n files are stored to a source file (C/Go/JS etc.) that can be accessed at runtime
+      - Defines dependencies on other (C) libraries
+      - Compiles Blueprint and GResource files
+      - Builds the app main entrypoint itself
+  - Flatpak manifest (more about this later)
 - GTK application structure (GObject, signals, properties, methods etc.)
   - GObject System (https://docs.gtk.org/gobject/tutorial.html):
     - Adds language-independend/C-based object system/OOP
@@ -560,9 +609,9 @@
 - Maintenance
   - OSS maintenance and releases (keeping up with GNOME releases, deprecations etc.)
   - Submitting your app to GNOME Circle (https://circle.gnome.org/)
-    - Apps
+    - Apps (this needs work)
       - Requirements (https://gitlab.gnome.org/Teams/Releng/AppOrganization/-/blob/main/AppCriteria.md)
-    - Libraries
+    - Libraries (this needs work)
       - Requirements (https://gitlab.gnome.org/Teams/Circle/-/blob/main/library_criteria.md)
   - Contributing directly to GNOME
   - GNOME foundation membership and it's benefits (https://foundation.gnome.org/membership)
