@@ -55,7 +55,7 @@ const MainWindow = GObject.registerClass(
   {
     GTypeName: "MainWindow",
     Template: "resource:///com/pojtinger/felicitas/VanLUGNewsJS/window.ui",
-    InternalChildren: ["article_list", "toast_overlay"],
+    InternalChildren: ["article_list", "toast_overlay", "refresh_button"],
   },
   class Window extends Adw.ApplicationWindow {
     #articles;
@@ -77,6 +77,7 @@ const MainWindow = GObject.registerClass(
         return row;
       });
 
+      this._refresh_button.connect("clicked", () => this.#load());
       this.#load();
     }
 
